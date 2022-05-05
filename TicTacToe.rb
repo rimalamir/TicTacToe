@@ -75,8 +75,8 @@ def format_input(move)
 end
 
 #PROGRAM STARTS HERE
-print "ENTER SIZE FOR GAME: no. of rows:  "
-size = gets.to_i
+# print "ENTER SIZE FOR GAME: no. of rows:  "
+size = 3#gets.to_i
 
 new_game = Game.new size
 
