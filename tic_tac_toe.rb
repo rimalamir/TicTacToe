@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'io/console'
 
 ### A Game class that assigns players, keeps track of game states, and validates user input
