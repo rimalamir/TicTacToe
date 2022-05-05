@@ -35,14 +35,10 @@ class Game
     puts @turn == @player_one ?  'PLAYER ONE\'S TURN' : 'PLAYER TWO\'S TURN' unless @game_over
   end
 
-  private
-
   def check_for_tie
     @game_over = @total_moves == (@size * @size) # GAME OVER BY TIE
     puts 'GAME TIED' if @game_over
   end
-
-  private
 
   def render_game
     @size.times do |index|
@@ -52,8 +48,6 @@ class Game
       print "\n"
     end
   end
-
-  public
 
   def check_valid_move?(input_x, input_y)
     @game_state[input_x][input_y] == '-'
@@ -79,19 +73,13 @@ class Game
     false
   end
 
-  private
-
   def game_over_in_row?(input_x)
     @game_state[input_x].none? { |elem| elem != @turn }
   end
 
-  private
-
   def game_over_in_column?(input_y)
     @game_state.transpose[input_y].none? { |elem| elem != @turn }
   end
-
-  private
 
   def game_over_in_main_diagonal?
     main_diagonal_elements = (0...@size).map { |element| @game_state[element][element] }
@@ -102,6 +90,9 @@ class Game
     opposite_diagonal_elements = (0...@size).map { |element| @game_state.transpose.map(&:reverse)[element][element] }
     opposite_diagonal_elements.none? { |a| a != @turn }
   end
+
+  private :game_over_in_opposite_diagonal?, :game_over_in_main_diagonal?, :game_over_in_column?, :game_over_in_row?
+  private :check_game_over?, :switch_turn, :check_for_tie, :handle_game_over_case, :render_game
 
 end
 
