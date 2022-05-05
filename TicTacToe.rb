@@ -9,16 +9,24 @@ class Game
     @game_state =  Array.new(size){Array.new(size) { "-" }}
     @turn = @player_one
     @game_over = false
+    @total_moves = 0
     render_game
+    puts @turn == @player_one ?  "PLAYER ONE'S TURN" : "PLAYER TWO'S TURN" if !@game_over
   end
 
   def update_game (inputX, inputY)
     @game_state[inputX][inputY] = @turn
-    switch_turn
+
+    @total_moves += 1
     render_game
 
     @game_over = check_game_over?(inputX, inputY)
-
+    puts "GAME OVER" if @game_over
+    puts @turn == @player_one ?  "PLAYER ONE WINS" : "PLAYER TWO WINS" if @game_over
+    return  if @game_over #GAME OVER BY WIN OR LOSE
+    switch_turn
+    @game_over = @total_moves == (@size * @size) #GAME OVER BY TIE
+    puts "GAME TIED" if @game_over
     puts @turn == @player_one ?  "PLAYER ONE'S TURN" : "PLAYER TWO'S TURN" if !@game_over
   end
 
@@ -29,7 +37,6 @@ class Game
       end
       print"\n"
     end
-
   end
 
 
@@ -41,7 +48,29 @@ class Game
     @turn = @turn == @player_one ? @player_two : @player_one
   end
 
-  
+  def check_game_over?(lastInputX, lastInputY)
+    #  CHECK THAT ROW
+    return true if !@game_state[lastInputX].any? {|elem| elem != @turn}
+
+    #CHECK THAT COLUMN
+    return true if !@game_state.transpose[lastInputY].any? {|elem| elem != @turn }
+
+    if lastInputX == lastInputY
+      #CHECK THAT DIAGONAL
+      main_diagonal_elements = (0 ... @size).collect { |element| @game_state[element][element] }
+      return true if !main_diagonal_elements.any? {|a| a != @turn }
+    end
+
+    #@game_state.transpose.map(&:reverse)[element][element]
+    if lastInputX + lastInputY == @size - 1
+      #CHECK OPPOSITE DIAGONAL
+      opposite_diagonal_elements = (0 ... @size).collect { |element| @game_state.transpose.map(&:reverse)[element][element]}
+      return true  if !opposite_diagonal_elements.any? {|a| a != @turn}
+    end
+
+    return false
+
+  end
 
 end
 
