@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'io/console'
-
+# THIS FILE IS NO LONGER IN USE
 ### A Game class that assigns players, keeps track of game states, and validates user input
 class Game
   attr_accessor :game_over
