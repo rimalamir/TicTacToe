@@ -8,7 +8,10 @@ require_relative 'player'
 class GameManager
 
   def start
+    @total_moves_made = 0
+    @game_over = false
     create_game
+
   end
 
   def create_game
@@ -19,8 +22,6 @@ class GameManager
       valid_game_size = size > 1
       @board = Board.new(size) if valid_game_size
     end
-    @total_moves_made = 0
-    @game_over = false
     create_players
     start_game
   end
