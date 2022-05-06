@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'board'
-# A class responsible for creating player
+# A class responsible for creating players
 class Player
   attr_accessor :player_token
 
