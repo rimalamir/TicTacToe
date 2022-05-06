@@ -6,12 +6,10 @@ require_relative 'player'
 
 # Class responsible for starting a game, validating inputs, monitoring the state of game
 class GameManager
-
   def start
     @total_moves_made = 0
     @game_over = false
     create_game
-
   end
 
   def create_game
@@ -40,11 +38,17 @@ class GameManager
     until @game_over
       puts "PLAYER #{@turn.player_token} ENTER YOUR MOVE: "
       input = format_input gets
-      if !(input.all? { |num| num.between?(0, @board.size - 1)})
-        puts "PLEASE CHECK YOUR INPUT, ENTER VALUES BETWEEN 1,1 to #{@board.size}, #{@board.size}"
-      else
-        make_move(input.first, input.last)
-      end
+      validate_moves(input)
+    end
+  end
+
+  def validate_moves(input)
+    if !(input.all? { |num| num.between?(0, @board.size - 1)})
+      puts "PLEASE CHECK YOUR INPUT, ENTER VALUES BETWEEN 1,1 to #{@board.size}, #{@board.size}"
+    elsif input.count == 2
+      make_move(input.first, input.last)
+    else
+      puts 'INVALID MOVE'
     end
   end
 
