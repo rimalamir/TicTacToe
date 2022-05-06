@@ -47,7 +47,7 @@ class Board
   end
 
   def same_token_in_opposite_diagonal?(player_token)
-    opposite_diagonal_elements = (0...@size).map { |element| @board_state.transpose.map(&:reverse)[element][element] }
-    opposite_diagonal_elements.none? { |a| a != player_token }
+    opposite_diagonal_elements = (0...@size).map { |element| @board_state.map(&:reverse)[element][element] }
+    a = opposite_diagonal_elements.none? { |a| a != player_token }
   end
 end

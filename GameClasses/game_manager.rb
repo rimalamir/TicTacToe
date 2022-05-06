@@ -74,7 +74,7 @@ class GameManager
     return true if last_input_x == last_input_y && @board.same_token_in_main_diagonal?(@turn.player_token)
 
     if last_input_x + last_input_y == @board.size - 1 && @board.same_token_in_opposite_diagonal?(@turn.player_token)
-      true
+      return true
     end
     false
   end
