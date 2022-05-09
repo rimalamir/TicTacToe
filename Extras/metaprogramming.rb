@@ -39,7 +39,7 @@ Book.create_method(book.title)
 # pp book
 # pp book.test('abc')
 
-
+#Delegate pattern
 class Module
   def delegar(method, to:)
     define_method(method) do |*args, &block|
